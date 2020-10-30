@@ -1,5 +1,6 @@
 trigger:
 - main
+- gateway_sa
 
 pool:
     vmImage: 'Ubuntu-16.04'
