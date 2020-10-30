@@ -9,8 +9,10 @@ variables:
 
 steps:
 - task: Docker@2
-  displayName: Build an image
+  displayName: Build and push an image to container registry
   inputs:
-    repository: $(imageName)
-    command: build
-    Dockerfile: server/gateway/Dockerfile
+    command: buildAndPush
+    containerRegistry: 'Prague'
+    repository: 'fhl2020Gateway'
+    command: 'buildAndPush'
+    Dockerfile: '**/server/gateway/Dockerfile'
