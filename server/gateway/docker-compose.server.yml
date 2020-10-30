@@ -1,16 +1,28 @@
-version: '3'
-services:
-    mongodb:
-        image: mongo:3.4.3
-    redis:
-        image: redis:alpine
-    gateway:
-        image: gateway_gateway:latest
-        ports:
-            - "8800:8800"
-            - "5888:5858"
-        command: node --inspect=0.0.0.0:5858 dist/www.js
-        environment:
-            - DEBUG=fluid:*
-            - NODE_ENV=development
-        restart: always
+trigger:
+- main
+- gateway_sa
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  imageName: 'pipelines-javascript-docker'
+
+steps:
+- task: Docker@2
+  displayName: Build and push an image to container registry
+  inputs:
+    containerRegistry: 'Prague'
+    repository: 'fhl2020Gateway'
+    command: 'buildAndPush'
+    Dockerfile: '**/server/gateway/Dockerfile'
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/server/gateway/docker-compose.server.yml'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
