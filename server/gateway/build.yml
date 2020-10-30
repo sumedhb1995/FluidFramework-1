@@ -9,14 +9,6 @@ variables:
   imageName: 'pipelines-javascript-docker'
 
 steps:
-- task: Docker@2
-  displayName: Build and push an image to container registry
-  inputs:
-    containerRegistry: 'Prague'
-    repository: 'fhl2020Gateway'
-    command: 'buildAndPush'
-    Dockerfile: '**/server/gateway/Dockerfile'
-
 - task: CopyFiles@2
   inputs:
     Contents: '**/server/gateway/docker-compose.server.yml'
