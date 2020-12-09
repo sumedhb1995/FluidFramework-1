@@ -3,6 +3,7 @@
  * Licensed under the MIT License.
  */
 
+import winston from "winston";
 import {
     getSpoPushServer,
     getSpoServer,
@@ -16,6 +17,7 @@ export function saveSpoTokens(req, params, accessToken: string, refreshToken: st
         req.session.tokens = {};
     }
     try {
+        winston.info(JSON.stringify(params));
         const url = new URL(params.scope);
         if (url.protocol === "https:" && (isSpoServer(url.hostname) || isSpoPushServer(url.hostname))) {
             req.session.tokens[url.hostname] = { accessToken, refreshToken };

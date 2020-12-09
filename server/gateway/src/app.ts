@@ -157,7 +157,7 @@ export function create(
                     ? process.env.MICROSOFT_CONFIGURATION_CLIENT_ID : microsoftConfiguration.clientId,
                 clientSecret: _.isEmpty(microsoftConfiguration.secret)
                     ? process.env.MICROSOFT_CONFIGURATION_CLIENT_SECRET : microsoftConfiguration.secret,
-                issuer: "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0",
+                issuer: "https://login.microsoftonline.com/cd4cc5d7-113d-4bc6-911e-2802bdfb4df8/v2.0",
                 passReqToCallback: true,
                 skipUserProfile: true,
                 tokenURL: "https://login.microsoftonline.com/organizations/oauth2/v2.0/token",
